@@ -23,13 +23,14 @@ module.exports = function(app) {
 
     // For each answer, compare the answers and add the absolute value of the difference to the total difference.
     for (var i = 0; i < thisUser.scores.length; i++) {
-        var otherAnswer = thisUser.scores[i];
+        var otherAnswer = user.scores[i];
         var thisAnswer = thisUser.scores[i];
-        var difference = otherScores - thisAnswer;
+        var difference = otherAnswer - thisAnswer;
         totalDifference += Math.abs(difference);
     }
 
     differences.push(totalDifference);
+    // data.difference
 });
 
     // Find the minimum difference score.
@@ -45,11 +46,12 @@ module.exports = function(app) {
         }
 
     }
-
+ friendData.push(thisUser);
     // Then send bestMatches to the client.
-    res.json(bestMatches);
+    res.json(bestMatches[0]);
     // If there is only one friend to compare to, skip all that work and just send back that friend.
 } else {
+     friendData.push(thisUser);
     res.json(friendData[0]);
 }
 
